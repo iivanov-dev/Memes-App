@@ -1,103 +1,173 @@
 body {
-  font-family: system-ui, -apple-system, sans-serif;
-  background-color: #f0f2f5;
-  color: #333;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  padding: 20px;
-  gap: 20px;
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+    padding: 20px;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .setting {
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-width: 400px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 380px;
+    flex-shrink: 0;
+    max-width: 100%;
 }
 
 .setting p {
-  font-size: 14px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: #555;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #555;
+    margin: 0;
 }
 
 .setting select,
 .setting input {
-  padding: 10px 12px;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
-  font-size: 15px;
-  outline: none;
-  transition: border 0.2s;
+    padding: 12px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
+    width: 100%;
+    box-sizing: border-box; /* ✅ Фикс выхода за границы */
 }
 
 .setting select:focus,
 .setting input:focus {
-  border-color: #3b82f6;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .preview {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  min-height: 300px;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  position: relative;
-  overflow: hidden;
+    flex-grow: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 20px;
+    max-width: 600px;
+    width: 100%;
 }
 
 .preview .js-image {
-  max-width: 100%;
-  max-height: 400px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    /* ✅ Картинка на весь preview */
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    object-fit: contain; /* ✅ Сохраняет пропорции БЕЗ искажений */
+    display: block;
+    border-radius: 8px;
 }
 
+/* ✅ Текст НА картинке */
 .js-top-text,
 .js-bottom-text {
-  position: absolute;
-  left: 10px;
-  right: 10px;
-  font-family: Impact, Arial, sans-serif;
-  font-size: 24px;
-  font-weight: 900;
-  text-align: center;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-  color: #fff;
-  pointer-events: none;
-  user-select: none;
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    font-family: 'Impact', 'Arial Black', Arial, sans-serif;
+    font-size: clamp(24px, 5vw, 48px); /* ✅ Адаптивный размер */
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff !important;
+    pointer-events: none;
+    user-select: none;
+    line-height: 1.1;
+    z-index: 10;
+    
+    /* ✅ Черная обводка текста (Impact style) */
+    text-shadow: 
+        -2px -2px 0 #000,
+         2px -2px 0 #000,
+        -2px  2px 0 #000,
+         2px  2px 0 #000,
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000,
+         0 0 5px rgba(0,0,0,0.8);
+    word-wrap: break-word;
+    max-height: 20%;
 }
 
 .js-top-text {
-  top: 10px;
+    top: 15px; /* ✅ Отступ от верха картинки */
 }
 
 .js-bottom-text {
-  bottom: 10px;
+    bottom: 15px; /* ✅ Отступ от низа картинки */
+}
+
+/* ✅ Пустое состояние */
+.preview:empty::before,
+.preview img[src=""] ~ .js-top-text,
+.preview img[src=""] ~ .js-bottom-text {
+    display: none;
+}
+
+/* ✅ Адаптивность */
+@media (max-width: 900px) {
+    body {
+        flex-direction: column;
+        align-items: center;
+        padding: 16px;
+        gap: 16px;
+    }
+    
+    .setting {
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+    }
+    
+    .preview {
+        width: 100%;
+        max-width: 500px;
+        min-height: 400px;
+        padding: 16px;
+    }
 }
 
 @media (max-width: 500px) {
-  body {
-    padding: 10px;
-  }
-
-  .setting {
-    max-width: 100%;
-  }
-
-  .js-top-text, .js-bottom-text {
-    font-size: 18px;
-  }
+    body {
+        padding: 12px;
+    }
+    
+    .setting {
+        padding: 16px;
+        gap: 12px;
+    }
+    
+    .preview {
+        padding: 12px;
+        min-height: 350px;
+    }
+    
+    .js-top-text,
+    .js-bottom-text {
+        left: 12px;
+        right: 12px;
+        top: 10px;
+        bottom: 10px;
+    }
 }

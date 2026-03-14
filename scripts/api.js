@@ -1,10 +1,10 @@
-class API{
-    constructor(){
-        this.baseUrl = 'https://api.imgflip.com';
-    }
+class API {
+	constructor() {
+		this.baseUrl = 'https://api.imgflip.com'
+	}
 
-    getMemes(){
-        return fetch(`${this.baseUrl}/get_memes`)
-        .then(data => data.json());
-    }
+	getMemes() {
+		return fetch(`${this.baseUrl}/get_memes`)
+			.then(data => data.json());
+	}
 }
