@@ -1,7 +1,7 @@
 class Controller {
     constructor() {
         this.model = new Model({
-            onMemesChange: this.handleModleMemesChange,
+            onMemesChange: this.handleModelMemesChange,
             onCurrentMemeIdChange: this.handleModelCurrentMemeIdChange,
             onTextTopChange: this.handleModelTextTopChange,
             onTextBottomChange: this.handleModelTextBottomChange
@@ -24,7 +24,7 @@ class Controller {
             });
     }
 
-    handleModleMemesChange = () => {
+    handleModelMemesChange = () => {
         this.view.renderMemesSelect(this.model.getMemes(), this.model.getCurrentMemeId());
     } 
 
@@ -45,14 +45,18 @@ class Controller {
     }
 
     handleViewTextTopChange = (text) => {
-        // проверка на количество символов
+        const maxLength = 10;
         
-        this.model.setTextTop(text);
+        if (text.length <= maxLength) {
+            this.model.setTextTop(text);
+        }
     }
 
     handleViewTextBottomChange = (text) => {
-        // проверка на количество символов
+        const maxLength = 10;
         
-        this.model.setTextBottom(text);
+        if (text.length <= maxLength) {
+            this.model.setTextBottom(text);
+        }
     }
 }
