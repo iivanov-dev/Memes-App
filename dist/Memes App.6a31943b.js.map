@@ -1,0 +1,1 @@
+{"mappings":"AAAA,MAAM,MAAM,IAAI;AAEhB,IAAI,IAAI","sources":["src/scripts/index.js"],"sourcesContent":["const app = new Controller();\n\napp.init();"],"names":[],"version":3,"file":"Memes App.6a31943b.js.map","sourceRoot":"/__parcel_source_root/"}
